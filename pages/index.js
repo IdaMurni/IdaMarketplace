@@ -1,4 +1,3 @@
-import styles from '../styles/Home.module.css';
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -35,6 +34,7 @@ export default function Home() {
         image: meta.data.image,
         name: meta.data.name,
         description: meta.data.description,
+        category: meta.data.category
       }
       return item;
     }))
@@ -67,41 +67,44 @@ export default function Home() {
     <h1 className="px-20 py-10 text-3xl">No items in market place</h1>
   )
   return (
-<div className="flex justify-center">
-     <div className="px-4" style={{ maxWidth: '1600px'}}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-        {
-          nfts.map((nft, i) =>(
-            <div key={i} className="border shadow rounded-xl overflow-hidden">
-             
-              <img
+    <div className="mt-8">
+      <div className="max-w-2xl mx-auto py-16 px-4 sm:py-15 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Customers also purchased</h2>
+
+        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {nfts.map((nft, i) => (
+            <div key={i} className="group relative">
+              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                <img
                   src={nft.image}
-                  alt="Picture of the author"
-                  width={500}
-                  height={500}
-                  // blurDataURL="data:..." automatically provided
-                  // placeholder="blur" // Optional blur-up while loading
+                  alt={nft.name}
+                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
-                        <div className="p-4">
-                <p style={{ height: '64px'}} className="text-2xl font-semibold">
-                  {nft.name}
-                </p>
-                <div style={{ height: '70px', overflow: 'hidden'}}>
-                  <p className="text-gray-400">{nft.description}</p>
+              </div>
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href={nft.name}>
+                      <span aria-hidden="true" className="absolute inset-0" />
+                      {nft.name}
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">{nft.description}</p>
                 </div>
               </div>
-              <div className="p-4 bg-black">
-                <p className="text-2xl mb-4 font-bold text-white">
-                  {nft.price} MATIC
-                </p>
-                <button className="w-full bg-pink-500 text-white font-bold py-2 px-12 rounded"
-                onClick={() => buyNFT(nft)}>Buy NFT</button>
+              <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 grid-flow-row">
+                <div>
+                  <p className="text-sm font-medium text-gray-900">{nft.price} MATIC</p>
+                </div>
+                <div>
+                  <button className="w-full bg-violet-500 text-white py-2 px-12"
+                onClick={() => buyNFT(nft)}>Buy</button>
+                </div>
+              </div>
             </div>
-            </div>
-          ))
-        }
+          ))}
+        </div>
       </div>
-     </div>
-   </div>
+    </div>
   )
 }

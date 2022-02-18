@@ -3,6 +3,7 @@ import {ethers } from 'ethers'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
 import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
+import Select from 'react-select'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
 
@@ -17,7 +18,7 @@ import Image from 'next/Image'
 
 export default function CreateItem() {
     const [fileUrl, setFileUrl] = useState(null)
-    const [formInput, updateFormInput] = useState({price: '', name: '', description:''})
+    const [formInput, updateFormInput] = useState({name: '', category: '', price: '', description:''})
     const router = useRouter();
 
     async function onChange(e) {
@@ -39,15 +40,15 @@ export default function CreateItem() {
 
     //1. create item (image/video) and upload to ipfs
     async function createItem(){
-        const {name, description, price} = formInput; //get the value from the form input
+        const {name, category, description, price} = formInput; //get the value from the form input
         
         //form validation
-        if(!name || !description || !price || !fileUrl) {
+        if(!name || !category || !description || !price || !fileUrl) {
             return
         }
 
         const data = JSON.stringify({
-            name, description, image: fileUrl
+            name, category, description, image: fileUrl
         });
 
         try{
@@ -100,6 +101,12 @@ export default function CreateItem() {
 
     }
 
+    const options= [
+        { value: 'general', label: 'Global NFT' },
+        { value: 'card', label: 'Card NFT' },
+        { value: 'book', label: 'Book NFT' },
+    ]
+
     return (
         <div className="flex justify-center">
             <div className="w-1/2 flex flex-col pb-12">
@@ -108,6 +115,13 @@ export default function CreateItem() {
                     className="mt-8 border rounded p-4"
                     onChange={e => updateFormInput({...formInput, name: e.target.value})}
                     />
+                <select
+                    className="mt-8 border rounded p-4"
+                    onChange={e => updateFormInput({...formInput, category: e.target.value})} >
+                        <option value="global">Global NFT</option>
+                        <option value="card">Card NFT</option>
+                        <option value="book">Book NFT</option>
+                    </select>
                 <textarea
                      placeholder="Asset description"
                      className="mt-2 border rounded p-4"
