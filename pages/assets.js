@@ -2,7 +2,7 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
-import Image from 'next/image'
+import Image from 'next/Image'
 
 import {
     nftMarketAddress, nftAddress
@@ -65,11 +65,9 @@ export default function Assets() {
                             className="rounded"
                             width={350}
                             height={500} 
-                            // blurDataURL="data:..." automatically provided
-                            // placeholder="blur" // Optional blur-up while loading
                           />
                 <div className="p-4 bg-black">
-                  <p className="text-2xl font-bold text-white">Price - {nft.price} ETH</p>
+                  <p className="text-2xl font-bold text-white">Price - {nft.price} MATIC</p>
                 </div>
               </div>
             ))

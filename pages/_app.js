@@ -3,11 +3,10 @@ import Link from 'next/link'
 import { Fragment, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import Teasers from '../components/teasers'
-import Header from '../components/header'
+import Image from 'next/Image'
 
 const navigation = [
-  { name: 'Home', href: '/', current: false },
+  { name: 'Explore', href: 'explore-collections', current: false },
   { name: 'Dashboard', href: 'dashboard', current: false },
   { name: 'Create NFT', href: 'create-item', current: false },
   { name: 'Assets', href: 'assets', current: false },
@@ -20,8 +19,8 @@ function MyApp({ Component, pageProps }) {
   }
   return (
     <div className="relative">
-      <div className="z-10 fixed w-full inset-0">
-        <Disclosure as="nav" className="bg-white shadow-lg">
+      <div className="z-10 w-full inset-0">
+        <Disclosure as="nav" className="bg-white fixed z-10 w-full shadow-lg">
           {({ open }) => (
             <>
               <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -39,16 +38,15 @@ function MyApp({ Component, pageProps }) {
                   </div>
                   <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                     <div className="flex-shrink-0 flex items-center">
-                      <img
-                        className="block lg:hidden h-8 w-auto"
-                        src="https://raw.githubusercontent.com/1Hive/dao-list/master/assets/IdaMurni/logo.png"
-                        alt="IdaMurni"
-                      />
-                      <img
+                      <a href="/">
+                      <Image
                         className="hidden lg:block h-8 w-auto"
-                        src="https://raw.githubusercontent.com/1Hive/dao-list/master/assets/IdaMurni/logo_type.png"
+                        src="/logo_type.png"
                         alt="IdaMurni"
+                        width={100}
+                        height={50}
                       />
+                      </a>
                     </div>
                     <div className="hidden sm:block sm:ml-6">
                       <div className="flex space-x-4">
@@ -57,8 +55,8 @@ function MyApp({ Component, pageProps }) {
                             key={item.name}
                             href={item.href}
                             className={classNames(
-                              item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                              'px-3 py-2 rounded-md text-sm font-medium'
+                              item.current ? 'text-black' : 'text-violet-600 hover:text-violet-400',
+                              'px-3 py-2 text-sm font-medium'
                             )}
                             aria-current={item.current ? 'page' : undefined}
                           >
@@ -93,9 +91,7 @@ function MyApp({ Component, pageProps }) {
           )}
         </Disclosure>
       </div>
-    <div className="md:container md:mx-auto md:mt-14 xl:mt-14 lg:mt-14 bg-white">
-      <Header></Header>
-      <Teasers></Teasers>
+    <div className="md:container pt-16 md:mx-auto bg-white">
       <Component {...pageProps} />
     </div>
     </div>
