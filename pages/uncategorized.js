@@ -39,8 +39,11 @@ const Uncategorized = () => {
         }
         return item;
       }))
+      const entries = items.filter(name => name.category === undefined)
+
+      console.log('undefined here >>>', entries)
   
-      setNfts(items);
+      setNfts(entries);
       setLoadingState('loading')
     }
   
