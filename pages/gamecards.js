@@ -96,7 +96,10 @@ const GameCards = () => {
                     </div>
                     <div className="border-t mt-4 grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 grid-flow-row">
                       <div className="text-center p-2">
-                        <p className="text-sm font-medium text-gray-900">{nft.price} MATIC</p>
+                        <p className="text-sm font-medium text-gray-900 ">
+                            <img src="/polygon.png" className="inline-block align-middle mr-2" width={20} height={20} />
+                            <span className="inline-block align-middle">{nft.price} </span>
+                        </p>
                       </div>
                       <div>
                         <button className="w-full bg-violet-500 text-white py-2 px-12 rounded-r-sm"
