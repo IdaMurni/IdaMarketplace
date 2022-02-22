@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Web3Modal from 'web3modal';
 import { nftAddress, nftMarketAddress } from '../config';
-import Link from 'next/link'
+// import Link from 'next/link'
 import Image from 'next/Image'
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json';
 import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json';
@@ -73,7 +73,7 @@ const Uncategorized = () => {
             <div className="max-w-2xl mx-auto px-4 sm:py-15 sm:px-6 lg:max-w-7xl lg:px-8">
               <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 {nfts.map((nft, i) => (
-                  <div key={i} className="group relative">
+                  <div key={i} className="border shadow-lg rounded shadow-gray-200">
                     <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
                       <Image
                         src={nft.image}
@@ -83,17 +83,18 @@ const Uncategorized = () => {
                         height={500}
                       />
                     </div>
-                    <div className="mt-4 flex justify-between">
+                    <div className="p-2 mt-4 flex justify-between">
                       <div>
+                        <h3>{nft.name}</h3>
                         <p className="truncate overflow-hidden w-32 mt-1 text-sm text-gray-500">{nft.description}</p>
                       </div>
                     </div>
-                    <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 grid-flow-row">
-                      <div>
+                    <div className="border-t mt-4 grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 grid-flow-row">
+                      <div className="text-center p-2">
                         <p className="text-sm font-medium text-gray-900">{nft.price} MATIC</p>
                       </div>
                       <div>
-                        <button className="w-full bg-violet-500 text-white py-2 px-12"
+                        <button className="w-full bg-violet-500 text-white py-2 px-12 rounded-r-sm"
                       onClick={() => buyNFT(nft)}>Buy</button>
                       </div>
                     </div>

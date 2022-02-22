@@ -4,12 +4,14 @@ import { Fragment, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import Image from 'next/Image'
+import Footer from '../components/footer';
 
 const navigation = [
   { name: 'Explore', href: 'explore-collections', current: false },
   { name: 'Dashboard', href: 'dashboard', current: false },
   { name: 'Create NFT', href: 'create-item', current: false },
   { name: 'Assets', href: 'assets', current: false },
+  // { name: 'Test', href: 'test', current: false },
 ]
 
 function MyApp({ Component, pageProps }) {
@@ -49,7 +51,7 @@ function MyApp({ Component, pageProps }) {
                       </a>
                     </div>
                     <div className="hidden sm:block sm:ml-6">
-                      <div className="flex space-x-4">
+                      <div className="flex space-x-4 mt-2">
                         {navigation.map((item) => (
                           <a
                             key={item.name}
@@ -60,7 +62,7 @@ function MyApp({ Component, pageProps }) {
                             )}
                             aria-current={item.current ? 'page' : undefined}
                           >
-                            {item.name}
+                            {item.name.toUpperCase()}
                           </a>
                         ))}
                       </div>
@@ -93,6 +95,7 @@ function MyApp({ Component, pageProps }) {
       </div>
     <div className="md:container pt-16 md:mx-auto bg-white">
       <Component {...pageProps} />
+      <Footer></Footer>
     </div>
     </div>
   )

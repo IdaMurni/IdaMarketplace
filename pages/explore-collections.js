@@ -1,67 +1,101 @@
-import React from 'react'
-import { TabGroup } from '@statikly/funk'
-import Uncategorized from './uncategorized';
-import GameCards from './gamecards';
-import Books from './books';
-
-const tabs = [
-    { key: 0, label: 'Uncategorized' },
-    { key: 1, label: 'Gamecards' },
-    { key: 2, label: 'Books' }
-]
+import React from "react";
+import Books from "./books";
+import GameCards from "./gamecards";
+import Uncategorized from "./uncategorized";
 
 const ExploreCollection = () => {
-    return(
-        <>
-            <div className="h-screen w-full flex flex-col justify-center items-center">
-            <TabGroup numTabs={3} direction={TabGroup.direction.HORIZONTAL}>
-                <TabGroup.TabList>
-                    { 
-                        tabs.map((tab) => (
-                            <TabGroup.Tab
-                                index={tab.key}
-                                key={tab.label}
-                                className="h-12 px-12 transition-colors duration-150 text-xs font-bold"
-                                activeClassName="bg-violet-600 text-white"
-                                inactiveClassName="text-black"
-                            >
-                            {tab.label.toUpperCase()}
-                            </TabGroup.Tab>
-                        ))
-                    }
-                </TabGroup.TabList>
-                <div className='w-full divide-y divide-solid md:divide-solid l:divide-solid'>
-                    <TabGroup.TabPanel
-                    index={0}
-                    className="p-16 transition-all transform h-64"
-                    activeClassName="opacity-100 duration-500 translate-x-0"
-                    inactiveClassName="absolute opacity-0 -translate-x-2"
-                    >
-                        <Uncategorized/>
-                    </TabGroup.TabPanel>
-
-                    <TabGroup.TabPanel
-                    index={1}
-                    className="p-16 transition-all transform h-64 flex flex-col"
-                    activeClassName="opacity-100 duration-500 translate-x-0"
-                    inactiveClassName="absolute opacity-0 -translate-x-2"
-                    >
-                        <GameCards />
-                    </TabGroup.TabPanel>
-
-                    <TabGroup.TabPanel
-                    index={2}
-                    className="p-16 transition-all transform h-64"
-                    activeClassName="opacity-100 duration-500 translate-x-0"
-                    inactiveClassName="absolute opacity-0 -translate-x-2"
-                    >
-                        <Books />
-                    </TabGroup.TabPanel>
+  const [openTab, setOpenTab] = React.useState(1);
+  return (
+    <>
+      <div className="flex flex-wrap">
+        <div className="w-full mt-20">
+          <ul
+            className="flex mb-0 list-none flex-wrap pt-3 flex-row border-b-4 border-violet-600"
+            role="tablist"
+          >
+            <li className="-mb-px last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  "text-xs font-bold uppercase px-5 py-3 block leading-normal " +
+                  (openTab === 1
+                    ? "text-white bg-violet-600"
+                    : "text-violet-600 bg-white")
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  setOpenTab(1);
+                }}
+                data-toggle="tab"
+                href="#link1"
+                role="tablist"
+              >
+                Uncategorized
+              </a>
+            </li>
+            <li className="-mb-px border-l last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  "text-xs font-bold uppercase px-5 py-3 block leading-normal " +
+                  (openTab === 2
+                    ? "text-white bg-violet-600"
+                    : "text-violet-600 bg-white")
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  setOpenTab(2);
+                }}
+                data-toggle="tab"
+                href="#link2"
+                role="tablist"
+              >
+                 GameCards
+              </a>
+            </li>
+            <li className="-mb-px border-l last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  "text-xs font-bold uppercase px-5 py-3 block leading-normal " +
+                  (openTab === 3
+                    ? "text-white bg-violet-600"
+                    : "text-violet-600 bg-white")
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  setOpenTab(3);
+                }}
+                data-toggle="tab"
+                href="#link3"
+                role="tablist"
+              >
+                 Books
+              </a>
+            </li>
+          </ul>
+          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6">
+            <div className="px-4 py-5 flex-auto">
+              <div className="tab-content tab-space">
+                <div className={openTab === 1 ? "block" : "hidden"} id="link1">
+                    <Uncategorized></Uncategorized>
                 </div>
-            </TabGroup>
+                <div className={openTab === 2 ? "block" : "hidden"} id="link2">
+                    <GameCards></GameCards>
+                </div>
+                <div className={openTab === 3 ? "block" : "hidden"} id="link3">
+                    <Books></Books>
+                </div>
+              </div>
             </div>
-        </>
-    );
-}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-export default ExploreCollection;
+export default function TabsRender() {
+  return (
+    <>
+      <ExploreCollection color="pink" />
+    </>
+  );
+}
