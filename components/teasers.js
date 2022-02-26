@@ -37,7 +37,7 @@ export default function Teasers() {
             Tell us your Story
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            it doesn't matter if it customable Story, Gamecards or Books. we love to serve and show the world how unique 
+            it doesn't matter if it customable Story, Gamecards or Books. we love to serve and show the world how unique your Project are!
           </p>
         </div>
 

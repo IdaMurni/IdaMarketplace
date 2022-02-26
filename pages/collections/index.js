@@ -3,7 +3,7 @@ import Books from "./books";
 import GameCards from "./gamecards";
 import Uncategorized from "./uncategorized";
 
-const ExploreCollection = () => {
+const Collections = () => {
   const [openTab, setOpenTab] = React.useState(1);
   return (
     <>
@@ -95,7 +95,7 @@ const ExploreCollection = () => {
 export default function TabsRender() {
   return (
     <>
-      <ExploreCollection color="pink" />
+      <Collections color="pink" />
     </>
   );
 }
