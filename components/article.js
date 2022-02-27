@@ -4,7 +4,10 @@ import Web3Modal from 'web3modal';
 import { ethers } from 'ethers';
 import { nftAddress, nftMarketAddress } from '../config';
 import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json';
-import Modal from './Modal';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 const Article = ({nfts}) => {
 
@@ -27,12 +30,12 @@ const Article = ({nfts}) => {
             await transaction.wait();
         } catch (errors) {
             console.log('error', errors)
-
-            if(errors) return (
-                <>
-                    <Modal error={errors} />
-                </>
-            )
+            MySwal.fire({
+                title: 'Error!',
+                text: errors.data.message,
+                icon: 'error',
+                confirmButtonText: 'Cool'
+            })
         }
         // loadNFTs()
       }
@@ -65,8 +68,11 @@ const Article = ({nfts}) => {
                     </div>
                     <div className="p-2 mt-2 flex justify-between">
                       <div>
-                        <h3>{nft.name}</h3>
-                        <p className="truncate overflow-hidden w-32 mt-1 text-sm text-gray-500">{nft.description}</p>
+                       <h3 className="uppercase mb-2">{nft.name}</h3>
+                       <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-purple-600 bg-purple-200 uppercase">
+                            {nft.category ? nft.category : 'Uncategorized'}
+                        </span>
+                        <p className="mt-5 truncate overflow-hidden w-32 mt-1 text-sm text-gray-500">{nft.description}</p>
                       </div>
                     </div>
                     <div className="border-t mt-4 grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 grid-flow-row">

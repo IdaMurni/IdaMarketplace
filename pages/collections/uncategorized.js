@@ -50,7 +50,7 @@ const Uncategorized = () => {
     )
     return (
         <div>
-          <Article nfts={nfts} />
+          <Article nfts={nfts}  />
         </div>
     )
 }
