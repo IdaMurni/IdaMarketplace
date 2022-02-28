@@ -43,6 +43,7 @@ export default function Assets() {
         seller: i.seller,
         owner: i.owner,
         image: meta.data.image,
+        name: meta.data.name
       }
       return item
     }))
@@ -51,23 +52,35 @@ export default function Assets() {
   }
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets owned</h1>)
   return (
-    <div className="flex justify-center">
+    <>
+    <div>
       <div className="p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-4">
           {
             nfts.map((nft, i) => (
-              <div key={i} className="border shadow rounded-xl overflow-hidden">
-         
+              <div key={i} className="max-w-xl rounded-lg shadow-md lg:flex md:flex shadow-grey-600">
+                <img
+                  className="object-cover w-full md:w-1/2 lg:w-1/3 rounded"
+                  src={nft.image}
+                  alt="image"
+                />
+                <div className="px-6 pt-2 pb-2 pl-5 pr-5 text-center">
+                  <h3 className="uppercase mb-2">{nft.name}</h3>
+                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-purple-600 bg-purple-200 uppercase">
+                      {nft.category ? nft.category : 'Uncategorized'}
+                  </span>
 
-                <Image
-                            src={nft.image}
-                            alt="Picture of the author"
-                            className="rounded"
-                            width={350}
-                            height={500} 
-                          />
-                <div className="p-4 bg-black">
-                  <p className="text-2xl font-bold text-white">Price - {nft.price} MATIC</p>
+                  <div className="text-center p-2">
+                    <p className="text-sm font-medium text-gray-900">
+                        <img src="/polygon.png" className="inline-block align-middle mr-2" width={20} height={20} />
+                        <span className="inline-block align-middle">{nft.price} </span>
+                    </p>
+                  </div>
+
+                  <div>
+                    <button className="w-full bg-violet-500 text-white py-2 px-12 rounded-r-sm"
+                  onClick={() => buyNFT(nft)}>Details</button>
+                  </div>
                 </div>
               </div>
             ))
@@ -75,5 +88,6 @@ export default function Assets() {
         </div>
       </div>
     </div>
+    </>
   )
 }

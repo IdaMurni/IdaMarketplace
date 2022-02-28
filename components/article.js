@@ -72,7 +72,7 @@ const Article = ({nfts}) => {
                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-purple-600 bg-purple-200 uppercase">
                             {nft.category ? nft.category : 'Uncategorized'}
                         </span>
-                        <p className="mt-5 truncate overflow-hidden w-32 mt-1 text-sm text-gray-500">{nft.description}</p>
+                        <p className="mt-5 truncate overflow-hidden w-32 text-sm text-gray-500">{nft.description}</p>
                       </div>
                     </div>
                     <div className="border-t mt-4 grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 grid-flow-row">
