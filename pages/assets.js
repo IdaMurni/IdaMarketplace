@@ -51,9 +51,13 @@ export default function Assets() {
     setLoadingState('loaded') 
   }
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets owned</h1>)
+  
   return (
     <>
-    <div>
+    <div className="pl-4 pt-10 pb- border-b-2 mb-10">
+      <h3 className="font-medium text-3xl mb-2 text-violet-600">Assets</h3>
+    </div>
+    
       <div className="p-4">
         <div className="grid gap-4 grid-cols-1 md:grid-cols-4">
           {
@@ -78,8 +82,7 @@ export default function Assets() {
                   </div>
 
                   <div>
-                    <button className="w-full bg-violet-500 text-white py-2 px-12 rounded-r-sm"
-                  onClick={() => buyNFT(nft)}>Details</button>
+                    <button className="w-full bg-violet-500 text-white py-2 px-12 rounded-r-sm">Details</button>
                   </div>
                 </div>
               </div>
@@ -87,7 +90,6 @@ export default function Assets() {
           }
         </div>
       </div>
-    </div>
     </>
   )
 }

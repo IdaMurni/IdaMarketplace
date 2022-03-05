@@ -9,6 +9,9 @@ import {useRouter} from "next/router";
 import { StarIcon } from '@heroicons/react/solid'
 import Web3Modal from 'web3modal';
 import Breadcrumbs from '../../components/breadcrumbs';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 const Details = () => {
     const { query } = useRouter();
@@ -19,19 +22,27 @@ const Details = () => {
       const web3modal = new Web3Modal();
       const connection = await web3modal.connect();
       const provider = new ethers.providers.Web3Provider(connection);
-  
-      //signed trans
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(nftMarketAddress, Market.abi, signer);
-  
-      //set the price
-      const price = ethers.utils.parseUnits(nft.price.toString(), 'ether');
-      //make sale
-      const transaction = await contract.createMarketSale(nftAddress, nft.tokenId, {
-        value: price
-      });
-  
-      await transaction.wait();
+      try {
+        //signed trans
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(nftMarketAddress, Market.abi, signer);
+    
+        //set the price
+        const price = ethers.utils.parseUnits(nft.price.toString(), 'ether');
+        //make sale
+        const transaction = await contract.createMarketSale(nftAddress, nft.tokenId, {
+            value: price
+        });
+    
+        await transaction.wait();
+      } catch(errors) {
+        MySwal.fire({
+            title: 'Error!',
+            text: errors.data.message,
+            icon: 'error',
+            confirmButtonText: 'Cool'
+        })  
+      }
     }
 
     const product = {
@@ -44,13 +55,12 @@ const Details = () => {
         ],
         description: `${query.description}`,
         highlights: [
-          'Hand cut and sewn locally',
-          'Dyed with our proprietary colors',
-          'Pre-washed & pre-shrunk',
-          'Ultra-soft 100% cotton',
+          'Gold 70%',
+          'Single Fighter',
+          'Two Katanas',
+          'Power 70%',
         ],
-        details:
-          'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
+
     }
     const reviews = { href: '#', average: 4, totalCount: 117 }
     
@@ -79,7 +89,10 @@ const Details = () => {
               {/* Options */}
               <div className="lg:col-span-2 lg:border-l lg:border-gray-200 lg:pl-8">
                 <h2 className="sr-only">Product information</h2>
-                <p className="text-3xl text-gray-900">{product.price}</p>
+                <p className="text-sm font-medium text-gray-900">
+                    <img src="/polygon.png" className="inline-block align-middle mr-2" width={30} height={30} />
+                    <span className="inline-block align-middle text-3xl text-gray-900">{product.price} </span>
+                </p>
     
                 {/* Reviews */}
                 <div className="mt-6">
@@ -143,7 +156,12 @@ const Details = () => {
                         <h2 className="text-sm font-medium text-gray-900">Details</h2>
             
                         <div className="mt-4 space-y-6">
-                            <p className="text-sm text-gray-600">{product.details}</p>
+                        <ul className="pl-4 list-disc text-sm space-y-2 text-gray-400">
+                            <li>Contract Address: 0x9ACe64aB9f6fBFF6EC876275b00Dd7780088C2d7</li>
+                            <li>Seller: {query.seller}</li>
+                            <li>name: {query.name}</li>
+                            <li>tokenId: {query.tokenId}</li>
+                        </ul>
                         </div>
                     </div>
                 </div>

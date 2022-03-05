@@ -44,8 +44,9 @@ const Uncategorized = () => {
       setNfts(entries);
       setLoadingState('loading')
     }
-  
-    if(loadingState === 'loaded' && !nfts.length) return (
+    
+    console.log('NFTS >>>', nfts.length)
+    if(nfts.length != 0) return (
       <h1 className="px-20 py-10 text-3xl">No items in market place</h1>
     )
     return (

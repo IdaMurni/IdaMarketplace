@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/Image'
 import Web3Modal from 'web3modal';
@@ -10,7 +11,7 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 
 const Article = ({nfts}) => {
-
+  const [loadingState, setLoadingState] = useState('not-loaded')
     async function buyNFT(nft) {
         const web3modal = new Web3Modal();
         const connection = await web3modal.connect();
@@ -22,10 +23,13 @@ const Article = ({nfts}) => {
         
             //set the price
             const price = ethers.utils.parseUnits(nft.price.toString(), 'ether');
+            console.log('price', price)
             //make sale
             const transaction = await contract.createMarketSale(nftAddress, nft.tokenId, {
-            value: price
+              value: price
             });
+
+            console.log('transactions >>', transaction)
         
             await transaction.wait();
         } catch (errors) {
@@ -37,7 +41,10 @@ const Article = ({nfts}) => {
                 confirmButtonText: 'Cool'
             })
         }
+        
         // loadNFTs()
+        nfts
+        setLoadingState('loading')
       }
 
     return(
@@ -53,7 +60,6 @@ const Article = ({nfts}) => {
                           pathname: `/collections/${nft.tokenId.toString()}`,
                           query: nft
                         }}
-                        key={nft.tokenId}
                         >
                           <a>
                             <Image

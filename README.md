@@ -13,3 +13,19 @@ npx hardhat node
 node scripts/sample-script.js
 npx hardhat help
 ```
+
+Compile run Test
+```shell
+npx hardhat test
+```
+
+Compile Contract
+```shell
+npx hardhat compile
+```
+
+Deploy Contract to Mumbai network
+```shell
+//before deployed the Contract change the integer of x in config.js line 4
+npx hardhat run --network mumbai scripts/deploy.js
+```

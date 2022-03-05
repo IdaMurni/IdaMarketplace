@@ -95,7 +95,7 @@ const Collections = () => {
 export default function TabsRender() {
   return (
     <>
-      <Collections color="pink" />
+      <Collections />
     </>
   );
 }

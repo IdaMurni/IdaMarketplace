@@ -16,9 +16,8 @@ import Image from 'next/Image'
 
 
 export default function CreateItem() {
-    console.log('clicked')
     const [fileUrl, setFileUrl] = useState(null)
-    const [formInput, updateFormInput] = useState({price: '', category: '', name: '', description:''})
+    const [formInput, updateFormInput] = useState({ name: '', price: '', category: '', description:''})
     const router = useRouter();
 
     async function onChange(e) {
@@ -39,16 +38,16 @@ export default function CreateItem() {
     }
 
     //1. create item (image/video) and upload to ipfs
-    async function createItem(){
-        const {name, category, description, price} = formInput; //get the value from the form input
+    async function createNFT(){
+        const {name, price, category, description} = formInput; //get the value from the form input
         
         //form validation
-        if(!name || !category || !description || !price || !fileUrl) {
+        if(!name || !price || !category || !description || !fileUrl) {
             return
         }
 
         const data = JSON.stringify({
-            name, category, description, image: fileUrl
+            name, price, category, description, image: fileUrl
         });
 
         try{
@@ -77,8 +76,10 @@ export default function CreateItem() {
         //there events array that is returned, the first item from that event
         //is the event, third item is the token id.
         console.log('Transaction: ',tx)
-        console.log('Transaction events: ',tx.events[0])
+        console.log('Transaction events: ', transaction)
+        console.log('tx >>', tx)
         let event = tx.events[0]
+        console.log('event >>', event)
         let value = event.args[2]
         let tokenId = value.toNumber() //we need to convert it a number
 
@@ -102,12 +103,16 @@ export default function CreateItem() {
     }
 
     return (
+        <>
+        <div className="pl-4 pt-10 pb- border-b-2 mb-10">
+            <h3 className="font-medium text-3xl mb-2 text-violet-600">Create NFT</h3>
+        </div>
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
         <div className="flex justify-center">
             <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Name
                     </label>
                     <input 
@@ -119,7 +124,7 @@ export default function CreateItem() {
                     <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
                 </div>
                 <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Price
                     </label>
                     <input 
@@ -131,7 +136,7 @@ export default function CreateItem() {
                     <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
                 </div>
                 <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Category
                     </label>
                     <select 
@@ -147,7 +152,7 @@ export default function CreateItem() {
                     <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
                 </div>
                 <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Description
                     </label>
                     <textarea 
@@ -159,7 +164,7 @@ export default function CreateItem() {
                     <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
                 </div>
                 <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Upload
                     </label>
                     <input type="file" className="block w-full text-sm text-slate-500
@@ -187,7 +192,7 @@ export default function CreateItem() {
                     }
                 </div>
                 <div className="w-full px-4 py-3 text-right sm:px-6">
-                    <button onClick={createItem}
+                    <button onClick={createNFT}
                         className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >Create NFT</button>
                 </div>
@@ -195,5 +200,6 @@ export default function CreateItem() {
         </div>
         </div>
         </div>
+        </>
     )
 }
