@@ -42,7 +42,7 @@ const Uncategorized = () => {
       console.log('undefined here >>>', entries)
   
       setNfts(entries);
-      setLoadingState('loading')
+      setLoadingState('loading') 
     }
     
     console.log('NFTS >>>', nfts.length)
