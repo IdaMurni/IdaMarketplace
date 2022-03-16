@@ -29,3 +29,58 @@ Deploy Contract to Mumbai network
 //before deployed the Contract change the integer of x in config.js line 4
 npx hardhat run --network mumbai scripts/deploy.js
 ```
+
+#IdaMarketPlace contains Beta-Version of Smart Contracts
+1. NFT Marketplace
+2. NFT
+3. Auction
+4. Messages
+
+#How to use/Test Auction.
+1. before you deployed and interact with Auction, you need to deployed NFT contract and create an nft token.
+2. keep the contract address and the token_id. we need those to deployed the auction Smart Contract
+3. fill the _NFT, _NFTID, _STARTINGBID fields and deploy the auction contract.
+4. after auction deployed we need to aprove our NFT bei pasted the auction contract address and the tokenid. therefore we need our auction contract address and the tokenid.
+5. after it aproved we can now start the auction by calling start()
+6. after it is all ends the tokens will automatic transfered to the creator of the auction.
+
+by default the Auction will expired after 7 days.
+we could do dinamicly bei adding time expirations of the Auction.
+example:
+```shell
+enum TimeDuration {
+    Twentyfour,
+    Seven,
+    Ten,
+    Fifteen
+}
+
+TimeDuration public setDuration;
+
+function start(TimeDuration _setDuration) external {
+    setDuration = _setDuration;
+    ...
+    getTimeOut();
+    ...
+}
+
+function getTimeOut() public returns(uint){
+    if(setDuration == TimeDuration.Twentyfour) {
+        endAt = block.timestamp + 24 days; //24hour
+        return endAt;
+    } else if (setDuration == TimeDuration.Seven) {
+        endAt = block.timestamp + 7 days; //7days
+        return endAt;
+    } else if (setDuration == TimeDuration.Ten) {
+        endAt = block.timestamp + 10 days; //10days
+        return endAt;
+    } else if (setDuration == TimeDuration.OneMinute) {
+        endAt = block.timestamp + 60; //1Minute
+        return endAt;
+    }
+
+    endAt = block.timestamp + 15 days; //15days
+    return endAt;
+}
+
+```
