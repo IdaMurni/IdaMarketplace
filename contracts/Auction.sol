@@ -16,6 +16,14 @@ interface IERC721 {
 }
 
 contract Auction {
+    enum TimeDuration {
+        OneMinute, // <- testing purpose
+        Twentyfour,
+        Seven,
+        Ten,
+        Fifteen
+    }
+    TimeDuration public setDuration;
     event Start();
     event Bid(address indexed sender, uint amount);
     event Withdraw(address indexed bidder, uint amount);
@@ -23,7 +31,6 @@ contract Auction {
 
     IERC721 public nft;
     uint public nftId;
-
     address payable public seller;
     uint public endAt;
     bool public started;
@@ -45,15 +52,34 @@ contract Auction {
         highestBid = _startingBid;
     }
 
-    function start() external {
+    function start(TimeDuration _setDuration) external {
+        setDuration = _setDuration;
         require(!started, "started");
         require(msg.sender == seller, "not seller");
 
         nft.transferFrom(msg.sender, address(this), nftId);
         started = true;
-        endAt = block.timestamp + 7 days;
-
+        setTimeOut();
         emit Start();
+    }
+
+    function setTimeOut() public returns(uint){
+        if (setDuration == TimeDuration.OneMinute) {
+            endAt = block.timestamp + 60; //1Minute
+            return endAt;
+        } else if(setDuration == TimeDuration.Twentyfour) {
+            endAt = block.timestamp + 2 days; //24hour
+            return endAt;
+        } else if (setDuration == TimeDuration.Seven) {
+            endAt = block.timestamp + 7 days; //7days
+            return endAt;
+        } else if (setDuration == TimeDuration.Ten) {
+            endAt = block.timestamp + 10 days; //10days
+            return endAt;
+        }
+
+        endAt = block.timestamp + 15 days; //15days
+        return endAt;
     }
 
     function bid() external payable {

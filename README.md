@@ -45,7 +45,7 @@ npx hardhat run --network mumbai scripts/deploy.js
 6. after it is all ends the tokens will automatic transfered to the creator of the auction.
 
 by default the Auction will expired after 7 days.
-we could do dinamicly bei adding time expirations of the Auction.
+we could do dynamicly by adding time expirations of the Auction.
 example:
 ```shell
 enum TimeDuration {
@@ -60,13 +60,13 @@ TimeDuration public setDuration;
 function start(TimeDuration _setDuration) external {
     setDuration = _setDuration;
     ...
-    getTimeOut();
+    setTimeOut();
     ...
 }
 
-function getTimeOut() public returns(uint){
+function setTimeOut() public returns(uint){
     if(setDuration == TimeDuration.Twentyfour) {
-        endAt = block.timestamp + 24 days; //24hour
+        endAt = block.timestamp + 2 days; //24hour
         return endAt;
     } else if (setDuration == TimeDuration.Seven) {
         endAt = block.timestamp + 7 days; //7days
