@@ -7,10 +7,10 @@ import Footer from '../components/footer';
 
 const navigation = [
     { name: 'Collections', href: '/collections', current: false },
+    { name: 'Auction', href: '/auction', current: false },
     { name: 'Dashboard', href: '/dashboard', current: false },
     { name: 'Create NFT', href: '/create-item', current: false },
-    { name: 'Assets', href: '/assets', current: false },
-    // { name: 'Test', href: 'test', current: false },
+    { name: 'Assets', href: '/assets', current: false }
   ]
 
 const Navbar = () => {
