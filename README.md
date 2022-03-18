@@ -14,6 +14,6 @@ run app
 yarn dev
 ```
 
-<p align="center">
+<p style="text-align: center">
   <img src="https://github.com/IdaMurni/IdaMarketplace/blob/main/public/idamarketplace.png" width="250">
 </p>
