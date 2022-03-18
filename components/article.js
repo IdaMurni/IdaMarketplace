@@ -35,14 +35,13 @@ const Article = ({nfts}) => {
         } catch (errors) {
             console.log('error', errors)
             MySwal.fire({
-                title: 'Error!',
-                text: errors.data.message,
+                title: `Error!`,
+                text: errors && errors.data ? errors.data.message : errors.message,
                 icon: 'error',
                 confirmButtonText: 'Cool'
             })
         }
         
-        // loadNFTs()
         nfts
         setLoadingState('loading')
       }

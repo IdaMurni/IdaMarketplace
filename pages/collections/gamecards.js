@@ -10,7 +10,6 @@ import Article from '../../components/article';
 
 const GameCards = () => {
     const [nfts, setNfts] = useState([]);
-    const [loadingState, setLoadingState] = useState('not-loaded')
   
     useEffect(() => {
       loadNFTs();
@@ -46,11 +45,12 @@ const GameCards = () => {
       console.log('entries >>>', entries)
   
       setNfts(entries);
-      setLoadingState('loading')
     }
   
-    if(loadingState === 'loaded' && !nfts.length) return (
-      <h1 className="px-20 py-10 text-3xl">No items in market place</h1>
+    if(nfts.length === 0) return (
+      <div class="flex items-center justify-center h-screen">
+        <p class="text-2xl text-black md:text-2xl lg:text-2xl">No Item</p>
+      </div>
     )
     return (
         <div>

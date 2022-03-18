@@ -13,7 +13,6 @@ import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
 
 export default function Assets() {
   const [nfts, setNfts] = useState([])
-  const [loadingState, setLoadingState] = useState('not-loaded')
 
   useEffect(() => {
     loadNFTs()
@@ -48,9 +47,12 @@ export default function Assets() {
       return item
     }))
     setNfts(items)
-    setLoadingState('loaded') 
   }
-  if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets owned</h1>)
+  if (nfts.length === 0 ) return (
+    <div className="flex items-center justify-center h-screen">
+      <p className="text-2xl text-black md:text-2xl lg:text-2xl">No Item</p>
+    </div>
+  )
   
   return (
     <>

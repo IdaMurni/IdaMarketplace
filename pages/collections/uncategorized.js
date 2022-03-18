@@ -8,7 +8,6 @@ import Article from '../../components/article';
 
 const Uncategorized = () => {
     const [nfts, setNfts] = useState([]);
-    const [loadingState, setLoadingState] = useState('not-loaded')
   
     useEffect(() => {
       loadNFTs();
@@ -38,17 +37,16 @@ const Uncategorized = () => {
         return item;
       }))
       const entries = items.filter(name => name.category === undefined)
-
-      console.log('undefined here >>>', entries)
   
       setNfts(entries);
-      setLoadingState('loading') 
     }
     
-    console.log('NFTS >>>', nfts.length)
-    if(nfts.length != 0) return (
-      <h1 className="px-20 py-10 text-3xl">No items in market place</h1>
-    )
+    if(nfts.length === 0) return (
+        <div class="flex items-center justify-center h-screen">
+          <p class="text-2xl text-black md:text-2xl lg:text-2xl">No Item</p>
+        </div>
+      )
+
     return (
         <div>
           <Article nfts={nfts}  />

@@ -2,7 +2,9 @@ export default function Assets() {
 
   return (
     <>
-        <h1>Auction</h1>
+        <div class="flex items-center justify-center h-screen">
+            <p class="text-2xl text-black md:text-2xl lg:text-2xl">200 | Auction Page</p>
+        </div>
     </>
   )
 }
