@@ -44,8 +44,8 @@ npx hardhat run --network mumbai scripts/deploy.js
 5. after it aproved we can now start the auction by calling start()
 6. after it is all ends the tokens will automatic transfered to the creator of the auction.
 
-by default the Auction will expired after 7 days.
-we could do dynamicly by adding time expirations of the Auction.
+by default the Auction will expired after 2, 7, 10, and 15 days
+
 example:
 ```shell
 enum TimeDuration {
