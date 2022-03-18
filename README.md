@@ -32,7 +32,7 @@ npx hardhat run --network mumbai scripts/deploy.js
 
 #IdaMarketPlace contains Beta-Version of Smart Contracts
 1. NFT Marketplace
-2. NFT
+2. NFT - ERC721
 3. Auction
 4. Messages
 
@@ -73,9 +73,6 @@ function setTimeOut() public returns(uint){
         return endAt;
     } else if (setDuration == TimeDuration.Ten) {
         endAt = block.timestamp + 10 days; //10days
-        return endAt;
-    } else if (setDuration == TimeDuration.OneMinute) {
-        endAt = block.timestamp + 60; //1Minute
         return endAt;
     }
 
