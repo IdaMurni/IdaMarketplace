@@ -17,7 +17,6 @@ interface IERC721 {
 
 contract Auction {
     enum TimeDuration {
-        OneMinute, // <- testing purpose
         Twentyfour,
         Seven,
         Ten,
@@ -64,10 +63,7 @@ contract Auction {
     }
 
     function setTimeOut() public returns(uint){
-        if (setDuration == TimeDuration.OneMinute) {
-            endAt = block.timestamp + 60; //1Minute
-            return endAt;
-        } else if(setDuration == TimeDuration.Twentyfour) {
+        if(setDuration == TimeDuration.Twentyfour) {
             endAt = block.timestamp + 2 days; //24hour
             return endAt;
         } else if (setDuration == TimeDuration.Seven) {
