@@ -2,13 +2,28 @@ import React from "react";
 import Books from "./books";
 import GameCards from "./gamecards";
 import Uncategorized from "./uncategorized";
-
+import Breadcrumbs from '../../components/breadcrumbs';
 const Collections = () => {
   const [openTab, setOpenTab] = React.useState(1);
+  const product = {
+    breadcrumbs: [
+      { id: 1, name: 'Collections', href: '/collections' },
+    ],
+    highlights: [
+      'Gold 70%',
+      'Single Fighter',
+      'Two Katanas',
+      'Power 70%',
+    ],
+
+}
   return (
     <>
+      <div className="pl-4 pt-10 mb-10">
+          <Breadcrumbs data={product} />
+      </div>
       <div className="flex flex-wrap">
-        <div className="w-full mt-20">
+        <div className="w-full mt-5">
           <ul
             className="flex mb-0 list-none flex-wrap pt-3 flex-row border-b-4 border-violet-600"
             role="tablist"

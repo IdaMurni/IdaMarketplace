@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
 import Image from 'next/Image'
-
+import Breadcrumbs from '../components/breadcrumbs';
 import {
     nftMarketAddress, nftAddress
 } from '../config'
@@ -57,14 +57,27 @@ export default function Dashboard() {
     setNfts(items)
     setLoadingState('loaded')
   }
+
+  const product = {
+    breadcrumbs: [
+      { id: 1, name: 'Dashboard', href: '/dashboard' },
+    ],
+    highlights: [
+      'Gold 70%',
+      'Single Fighter',
+      'Two Katanas',
+      'Power 70%',
+    ],
+
+  }
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets created</h1>)
   return (
     <div>
-      <div className="pl-4 pt-10 pb- border-b-2 mb-10">
-          <h3 className="font-medium text-3xl mb-2 text-violet-600">Dashboard</h3>
+      <div className="pl-4 pt-10 mb-10">
+        <Breadcrumbs data={product} />
       </div>
 
-      <div className="p-4">
+      <div className="px-10">
         <h2 className="text-2xl py-2">Items Created</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {

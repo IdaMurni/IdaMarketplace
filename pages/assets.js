@@ -10,7 +10,7 @@ import {
 
 import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json'
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
-
+import Breadcrumbs from '../components/breadcrumbs';
 export default function Assets() {
   const [nfts, setNfts] = useState([])
 
@@ -53,13 +53,25 @@ export default function Assets() {
       <p className="text-2xl text-black md:text-2xl lg:text-2xl">No Item</p>
     </div>
   )
+
+  const product = {
+    breadcrumbs: [
+      { id: 1, name: 'Assets', href: '/assets' },
+    ],
+    highlights: [
+      'Gold 70%',
+      'Single Fighter',
+      'Two Katanas',
+      'Power 70%',
+    ],
+
+}
   
   return (
     <>
-    <div className="pl-4 pt-10 pb- border-b-2 mb-10">
-      <h3 className="font-medium text-3xl mb-2 text-violet-600">Assets</h3>
-    </div>
-    
+      <div className="pl-4 pt-10 mb-10">
+          <Breadcrumbs data={product} />
+      </div>
       <div className="p-4">
         <div className="grid gap-4 grid-cols-1 md:grid-cols-4">
           {

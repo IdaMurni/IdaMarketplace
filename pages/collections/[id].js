@@ -15,8 +15,6 @@ const MySwal = withReactContent(Swal)
 
 const Details = () => {
     const { query } = useRouter();
-    console.log('query >>>', query)
-  
   
     async function buyNFT(nft) {
       const web3modal = new Web3Modal();
@@ -38,7 +36,7 @@ const Details = () => {
       } catch(errors) {
         MySwal.fire({
             title: 'Error!',
-            text: errors.data.message,
+            text: errors && errors.data ? errors.data.message : errors.message,
             icon: 'error',
             confirmButtonText: 'Cool'
         })  

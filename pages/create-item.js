@@ -12,6 +12,7 @@ import {
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json';
 import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json';
 import { EtherscanProvider } from '@ethersproject/providers'
+import Breadcrumbs from '../components/breadcrumbs';
 import Image from 'next/Image'
 
 
@@ -102,10 +103,23 @@ export default function CreateItem() {
 
     }
 
+    const product = {
+        breadcrumbs: [
+          { id: 1, name: 'Create item', href: '/create-item' },
+        ],
+        highlights: [
+          'Gold 70%',
+          'Single Fighter',
+          'Two Katanas',
+          'Power 70%',
+        ],
+    
+    }
+
     return (
         <>
-        <div className="pl-4 pt-10 pb- border-b-2 mb-10">
-            <h3 className="font-medium text-3xl mb-2 text-violet-600">Create NFT</h3>
+        <div className="pl-4 pt-10 mb-10">
+            <Breadcrumbs data={product} />
         </div>
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
