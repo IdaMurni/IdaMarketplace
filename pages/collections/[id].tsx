@@ -11,6 +11,7 @@ import Web3Modal from 'web3modal';
 import Breadcrumbs from '../../components/breadcrumbs';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import Image from 'next/image'
 const MySwal = withReactContent(Swal)
 
 const Details = () => {
@@ -75,9 +76,8 @@ const Details = () => {
             {/* Product info */}
             <div className="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
               <div className="mt-4 lg:mt-0 lg:row-span-3">
-                <img
+                <Image
                     src={query.image}
-                    alt={query.name}
                     className="object-contain w-full rounded shadow-md"
                     width={300}
                     height={400}

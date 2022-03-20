@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 import Image from 'next/Image'
 
 export default function Header() {

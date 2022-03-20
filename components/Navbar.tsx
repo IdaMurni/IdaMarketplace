@@ -3,7 +3,7 @@ import { Fragment, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import Image from 'next/Image'
-import Footer from '../components/footer';
+import Footer from './footer';
 
 const navigation = [
     { name: 'Collections', href: '/collections', current: false },

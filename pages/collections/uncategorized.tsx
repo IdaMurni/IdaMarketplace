@@ -36,7 +36,7 @@ const Uncategorized = () => {
         }
         return item;
       }))
-      const entries = items.filter(name => name.category === undefined)
+      const entries = items.filter(name => name.category === 'global')
   
       setNfts(entries);
     }

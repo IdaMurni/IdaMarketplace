@@ -154,8 +154,7 @@ export default function CreateItem() {
                         Category
                     </label>
                     <select 
-                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                        type="select"
+                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         placeholder="Category of the asset"
                         onChange={e => updateFormInput({...formInput, category: e.target.value})}
                     >
@@ -171,7 +170,6 @@ export default function CreateItem() {
                     </label>
                     <textarea 
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                        type="textarea"
                         placeholder="sort Description about the asset"
                         onChange={e => updateFormInput({...formInput, description: e.target.value})}
                     />
@@ -187,7 +185,6 @@ export default function CreateItem() {
                     file:text-sm file:font-semibold
                     file:bg-violet-50 file:text-violet-700
                     hover:file:bg-violet-100"
-                    type="file"
                     name="Asset"
                     onChange={onChange}/>
                     {

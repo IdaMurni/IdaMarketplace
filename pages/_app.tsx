@@ -5,7 +5,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import Image from 'next/Image'
 import Footer from '../components/footer';
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 
 
 function MyApp({ Component, pageProps }) {

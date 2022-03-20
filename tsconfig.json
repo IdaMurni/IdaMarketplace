@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "include": [
+    "next-env.js",
+    "**/*.ts",
+    "**/*.tsx"
+, "components/header.tsx", "components/Layout.tsx", "components/most-reviews.tsx", "components/Navbar.tsx", "components/teasers.tsx", "components/footer.tsx", "components/category.tsx", "components/breadcrumbs.tsx", "components/article.tsx", "config.js"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
