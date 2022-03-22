@@ -50,7 +50,7 @@ export default function Dashboard() {
   const [message, setMessage] = useState("");
   const [signedMessage, setSignedMessage] = useState("");
   const [verified, setVerified]: any = useState();
-  const [nfts, setNfts] = useState([]);
+  const [nfts, setNfts]: any = useState([]);
   const [sold, setSold] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded');
 
@@ -125,6 +125,7 @@ export default function Dashboard() {
       console.log('changeNetwork >>>', changeNetwork);
       console.log('ChainId >>>', toHex(network));
       changeNetwork;
+      connectWallet();
     } catch (switchError) {
       if (switchError.code === 4902) {
         try {
@@ -234,25 +235,34 @@ export default function Dashboard() {
             ) : 
             <>
               <div>
-                    <Button onClick={switchNetwork} isDisabled={!network}>
+                    <button onClick={switchNetwork}>
                         Switch Network
-                    </Button>
-                    <Select placeholder="Select network" onChange={handleNetwork}>
+                    </button>
+                    <select placeholder="Select network" onChange={handleNetwork}>
                         <option value="3">Ropsten</option>
                         <option value="4">Rinkeby</option>
                         <option value="42">Kovan</option>
                         <option value="80001">Mumbai</option>
-                    </Select>            
+                    </select>            
               </div>
               <div className="relative block" style={{ height: "300px" }}>
-                        
+                 {/* placeholder div */}
               </div>
               <div className="relative py-16">
                 <div className="mx-auto px-4">
                   <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 -mt-64">
                     <div className="px-6">
-                      <Profile data={dataProfile} />
-                      <ItemsCreated data={NFTsItems} />
+                      {chainId == 80001 ?
+                        (<>
+                          <Profile data={dataProfile} />
+                          <ItemsCreated data={NFTsItems} /> 
+                        </>)
+                      : (
+                        <div className="flex items-center justify-center">
+                          <p className="text-2xl text-black md:text-2xl lg:text-2xl">Please Connect to Polygon Network!</p>
+                        </div>
+                      ) }
+                    
                     </div>
                   </div>
                 </div>
