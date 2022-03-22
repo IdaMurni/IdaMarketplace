@@ -34,15 +34,15 @@ export default function Profile({data}) {
                         </div>
                         <div className="mr-4 p-3 text-center">
                             <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                            10
+                            100
                             </span>
-                            <span className="text-sm text-gray-500">NFTs</span>
+                            <span className="text-sm text-gray-500">Items created</span>
                         </div>
                         <div className="lg:mr-4 p-3 text-center">
                             <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                            89
+                            25
                             </span>
-                            <span className="text-sm text-gray-500">Comments</span>
+                            <span className="text-sm text-gray-500">Items Sold</span>
                         </div>
                     </div>
                 </div>

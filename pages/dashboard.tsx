@@ -225,32 +225,37 @@ export default function Dashboard() {
           <Breadcrumbs data={product} />
         </div>
         { !account ? (
+            <div className="text-center py-16">
               <button onClick={connectWallet}
-              className="bg-green-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
-              type="button"
-              style={{ transition: "all .15s ease" }}
-            >
-              Connect Wallet
-            </button>
+                className="bg-green-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                type="button"
+                style={{ transition: "all .15s ease" }}
+              >
+                Connect Wallet
+              </button>
+            </div>
             ) : 
             <>
-              <div>
-                    <button onClick={switchNetwork}>
-                        Switch Network
-                    </button>
-                    <select placeholder="Select network" onChange={handleNetwork}>
-                        <option value="3">Ropsten</option>
-                        <option value="4">Rinkeby</option>
-                        <option value="42">Kovan</option>
-                        <option value="80001">Mumbai</option>
-                    </select>            
+              <div className="float-right md:w-2/5 sm:w-full col-end-7 col-span-2">
+                <div className="px-4 py-3 text-right sm:px-6">
+                  <label className="block text-sm font-medium text-gray-700">Network</label>
+                  <select className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Select network" onChange={handleNetwork}>
+                      <option value="3">Ropsten</option>
+                      <option value="4">Rinkeby</option>
+                      <option value="42">Kovan</option>
+                      <option value="80001">Mumbai</option>
+                  </select>   
+                </div>
+                <div className="px-4 py-3 text-right sm:px-6">
+                  <button onClick={switchNetwork} type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Switch Network</button>
+                </div>    
               </div>
-              <div className="relative block" style={{ height: "300px" }}>
+              <div className="block" style={{ height: "300px" }}>
                  {/* placeholder div */}
               </div>
-              <div className="relative py-16">
+              <div className="relative pb-16">
                 <div className="mx-auto px-4">
-                  <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 -mt-64">
+                  <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6">
                     <div className="px-6">
                       {chainId == 80001 ?
                         (<>
@@ -259,7 +264,7 @@ export default function Dashboard() {
                         </>)
                       : (
                         <div className="flex items-center justify-center">
-                          <p className="text-2xl text-black md:text-2xl lg:text-2xl">Please Connect to Polygon Network!</p>
+                          <p className="text-2xl text-black md:text-2xl lg:text-2xl antialiased">200 | Please Connect to Polygon Network!</p>
                         </div>
                       ) }
                     

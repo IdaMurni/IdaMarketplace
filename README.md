@@ -21,5 +21,5 @@ yarn dev
 ```
 
 <p align="center">
-  <img src="https://github.com/IdaMurni/IdaMarketplace/blob/main/public/idamarketplace.png" width="400">
+  <img src="https://github.com/IdaMurni/IdaMarketplace/blob/main/public/idamarketplace.png" width="600">
 </p>
