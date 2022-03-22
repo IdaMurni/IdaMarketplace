@@ -1,6 +1,11 @@
-# Basic IdaMarketplace-Frontend
+<h3 align="center">Official IdaMarketplace-Frontend</h3>
 
-The Project of IdaMarketplace will be separate in two repositories, IdaMarketplace-Frontend will contains UI only, IdaMarketplace-Backend will contains all solidity project.
+<p align="center">
+  <img src="https://github.com/IdaMurni/website/blob/main/src/assets/img/ida_murni_master.png" width="200"/>
+</p>
+
+
+The Project of IdaMarketplace will be separate in two repositories, IdaMarketplace-Frontend and IdaMarketplace-Backend.
 
 Test Purposes available in Mumbai Testnet
 ```shell
