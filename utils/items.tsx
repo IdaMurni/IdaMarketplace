@@ -4,29 +4,54 @@ import { nftAddress, nftMarketAddress } from "../config";
 import { Item } from "../models/Item.interface";
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json';
 import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json';
+import Web3Modal from "web3modal";
+import { providerOptions } from "../pages/networks/utils/providerOptions";
+let web3Modal;
 
-export default async function Items(): Promise<Item[]> {
-    const provider = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.infura.io/v3/bab89c57aa7f40f6860f59e271d12349');
-    const tokenContract = new ethers.Contract(nftAddress, NFT.abi, provider);
-    const marketContract = new ethers.Contract(nftMarketAddress, Market.abi, provider);
-
-    const data: any = await marketContract.fetchMarketItems();
-    const items: Item[] = await Promise.all(data.map(async i => {
-      const tokenUri = await tokenContract.tokenURI(i.tokenId);
-      const meta = await axios.get(tokenUri);
-      let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
-      let item: Item = {
-        price,
-        tokenId: i.tokenId.toNumber(),
-        seller: i.seller,
-        owner: i.owner,
-        image: meta.data.image,
-        name: meta.data.name,
-        description: meta.data.description,
-        category: meta.data.category
-      }
-      return item;
-    }));
-    
-    return items;
+if (typeof window !== "undefined") {
+    web3Modal = new Web3Modal({
+    cacheProvider: true, // optional
+    providerOptions // required
+    });
 }
+
+const dataItem = async (data:any, tokenContract: any): Promise<Item[]> => {
+  const items: Item[] = await Promise.all(data.map(async i => {
+    const tokenUri = await tokenContract.tokenURI(i.tokenId);
+    const meta = await axios.get(tokenUri);
+    let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
+    let item: Item = {
+      price,
+      tokenId: i.tokenId.toNumber(),
+      seller: i.seller,
+      owner: i.owner,
+      image: meta.data.image,
+      name: meta.data.name,
+      description: meta.data.description,
+      category: meta.data.category
+    }
+    return item;
+  }));
+  return items
+}
+
+const getItemData = async (rpcProfider: any, signer?: any): Promise<Item[]> => {
+  const provider = await web3Modal.connect();
+  const library: any = new ethers.providers.Web3Provider(provider);
+  let marketContract: ethers.Contract;
+  let data: any;
+  const tokenContract = new ethers.Contract(nftAddress, NFT.abi, rpcProfider);
+  if (signer) {
+    marketContract = new ethers.Contract(nftMarketAddress, Market.abi, signer);
+    data = await marketContract.fetchItemsCreated()
+    return await dataItem(data, tokenContract);
+  }
+  
+  marketContract = new ethers.Contract(nftMarketAddress, Market.abi, rpcProfider);
+
+  data = await marketContract.fetchMarketItems();
+  const items = await dataItem(data, tokenContract);
+  return items;
+}
+
+export default getItemData;

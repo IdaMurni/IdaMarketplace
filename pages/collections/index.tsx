@@ -23,7 +23,7 @@ const Collections = () => {
           <Breadcrumbs data={product} />
       </div>
       <div className="flex flex-wrap">
-        <div className="w-full mt-5">
+        <div className="w-full">
           <ul
             className="flex mb-0 list-none flex-wrap pt-3 flex-row border-b-4 border-violet-600"
             role="tablist"

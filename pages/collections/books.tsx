@@ -1,6 +1,8 @@
+import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import Article from '../../components/article';
-import Items from '../../utils/items';
+import { Item } from '../../models/Item.interface';
+import getItemData from '../../utils/items';
 
 const Books = () => {
     const [nfts, setNfts] = useState([]);
@@ -10,12 +12,9 @@ const Books = () => {
     }, []);
   
     async function loadNFTs(): Promise<void> {
-      const items = await Items();
-      console.log('items >>>', items)
+      const rpcConnect = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.infura.io/v3/' + process.env.INFURA_KEY);
+      const items: Item[]  = await getItemData(rpcConnect);
       const entries = items.filter(name => name.category === 'book')
-
-      console.log('entries >>>', entries)
-  
       setNfts(entries);
     }
   

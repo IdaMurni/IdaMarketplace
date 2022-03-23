@@ -1,8 +1,8 @@
 export default function Profile({data}) {
     return(
         <>  
-            <div className="flex flex-wrap justify-center">
-                <div className="w-full lg:w-3/12 px-4 flex justify-center">
+            <div className="text-center">
+                <div className="pb-10">
                     <img
                         alt="..."
                         src= { data.userAccount 
@@ -11,11 +11,11 @@ export default function Profile({data}) {
                         background: data.avatar.BackgroundSets.RandomBackground1,
                         characters: data.avatar.CharacterSets.Robots
                         }) : 'polygon.png'}
-                        className="shadow-xl rounded-full h-auto align-middle border-none -m-16 -ml-20 lg:-ml-16"
+                        className="shadow-xl rounded-full h-auto border-none mx-auto"
                         style={{ maxWidth: "150px" }}/>
 
                 </div>
-                <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
+                <div className="block text-center">
                     <button onClick={data.logout}
                             className="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                             type="button"
@@ -25,7 +25,7 @@ export default function Profile({data}) {
                     </button>
                 </div>
                 <div className="w-full block text-center">
-                    <div className="flex justify-center py-4 lg:pt-4 pt-8 mt-16">
+                    <div className="flex justify-center py-4 lg:pt-4 pt-8">
                         <div className="mr-4 p-3 text-center">
                             <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
                             22
@@ -48,7 +48,7 @@ export default function Profile({data}) {
                 </div>
             </div>
 
-            <div className="text-center mt-12">
+            <div className="text-center">
                 <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
                     Jenna Stones
                 </h3>
