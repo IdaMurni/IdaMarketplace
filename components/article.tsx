@@ -16,11 +16,14 @@ const Article = ({nfts}) => {
         const web3modal = new Web3Modal();
         const connection = await web3modal.connect();
         const provider = new ethers.providers.Web3Provider(connection);
+        const network = await provider.getNetwork();
+  
         try {
+          if (network.chainId === 80001){
             //signed trans
             const signer = provider.getSigner();
             const contract = new ethers.Contract(nftMarketAddress, Market.abi, signer);
-        
+
             //set the price
             const price = ethers.utils.parseUnits(nft.price.toString(), 'ether');
             console.log('price', price)
@@ -30,8 +33,16 @@ const Article = ({nfts}) => {
             });
 
             console.log('transactions >>', transaction)
-        
+
             await transaction.wait();
+          } 
+            MySwal.fire({
+              title: `Failed!!`,
+              text: 'Please connect to Polygon Network',
+              icon: 'error',
+              confirmButtonText: 'Cool'
+          })
+
         } catch (errors) {
             console.log('error', errors)
             MySwal.fire({
@@ -42,7 +53,7 @@ const Article = ({nfts}) => {
             })
         }
         
-        nfts
+        // nfts
         setLoadingState('loading')
       }
 
