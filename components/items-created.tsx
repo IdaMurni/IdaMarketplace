@@ -14,7 +14,7 @@ export default function ItemsCreated({data}) {
                     <div className="grid grid-cols-4 gap-4">
                         {
                             data.nfts.map(nft => (
-                                <div key={nft.image} className="border shadow-lg rounded shadow-gray-200">
+                                <div key={nft.tokenId} className="border shadow-lg rounded shadow-gray-200">
                                     <div className="w-full min-h-50 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md rounded-br-none rounded-bl-none overflow-hidden group-hover:opacity-75 lg:h-40 lg:aspect-none">
                                         <Image
                                             src={nft.image}

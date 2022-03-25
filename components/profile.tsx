@@ -1,3 +1,5 @@
+import QRCode from "react-qr-code";
+
 export default function Profile({data}) {
     return(
         <>  
@@ -59,6 +61,9 @@ export default function Profile({data}) {
                     
                     ) : <span>⚪️  Logged out</span> }
                     <span className="block">{data.userAccount}</span>
+                    <div className="py-10 flex justify-center">
+                        <QRCode value={data.userAccount} size={150} />
+                    </div>
                 </div>
             </div>
         </>

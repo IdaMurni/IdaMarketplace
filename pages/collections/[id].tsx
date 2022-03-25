@@ -8,7 +8,7 @@ import Web3Modal from 'web3modal';
 import Breadcrumbs from '../../components/breadcrumbs';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import Image from 'next/image'
+import Image from 'next/Image'
 const MySwal = withReactContent(Swal)
 
 const Details = () => {
