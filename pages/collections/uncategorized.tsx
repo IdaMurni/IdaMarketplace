@@ -15,7 +15,6 @@ const Uncategorized = () => {
       const rpcConnect = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.infura.io/v3/' + process.env.INFURA_KEY);
       const items: Item[]  = await getItemData(rpcConnect);
       const entries = items.filter(name => name.category === 'global')
-  
       setNfts(entries);
     }
     

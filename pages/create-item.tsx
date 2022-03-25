@@ -7,7 +7,16 @@ import Web3Modal from 'web3modal'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-const client = ipfsHttpClient(); //'https://ipfs.infura.io:5001/api/v0'
+const uri: string = 'https://ipfs.infura.io:5001/api/v0';
+const client = ipfsHttpClient(uri);
+
+interface MetaData {
+    name: string;
+    price: number;
+    category: string;
+    description: string;
+    image: string;
+}
 
 import {
     nftAddress,nftMarketAddress
@@ -26,6 +35,7 @@ export default function CreateItem() {
 
     async function onChange(e) {
         const file = e.target.files[0]
+        console.log('file >>>', file)
         try{ //try uploading the file
             const added = await client.add(
                 file,
@@ -41,30 +51,8 @@ export default function CreateItem() {
         }
     }
 
-    //1. create item (image/video) and upload to ipfs
-    async function createNFT(){
-        const {name, price, category, description} = formInput; //get the value from the form input
-        
-        //form validation
-        if(!name || !price || !category || !description || !fileUrl) {
-            return
-        }
 
-        const data = JSON.stringify({
-            name, price, category, description, image: fileUrl
-        });
-
-        try{
-            const added = await client.add(data)
-            const url = `https://ipfs.infura.io/ipfs/${added.path}`
-            //pass the url to sav eit on Polygon adter it has been uploaded to IPFS
-            createSale(url)
-        }catch(error){
-            console.log(`Error uploading file: `, error)
-        }
-    }
-
-    //2. List item for sale
+    //List item for sale
     async function createSale(url){
         const web3Modal = new Web3Modal();
         const connection = await web3Modal.connect();
@@ -138,9 +126,26 @@ export default function CreateItem() {
     const { errors } = formState;
     console.log('error >>', errors)
 
-    function onSubmit(data) {
-        // display form data on success
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(formInput)) //JSON.stringify(data, null, 4));
+    async function onSubmit(data: MetaData) {
+
+        const payload = JSON.stringify({
+            name: data.name,
+            category: data.category,
+            price: data.price,
+            description: data.description,
+            image: fileUrl
+        });
+
+
+        try{
+            const added = await client.add(payload)
+            const url = `https://ipfs.infura.io/ipfs/${added.path}`
+            //pass the url to sav eit on Polygon adter it has been uploaded to IPFS
+            createSale(url)
+        }catch(error){
+            console.log(`Error uploading file: `, error)
+        }
+
         return false;
     }
 
@@ -226,6 +231,7 @@ export default function CreateItem() {
                     name="Asset"
                     {...register('Asset')}
                     onChange={onChange}/>
+                    <p className="text-xs italic text-rose-600">{errors.Asset?.message}</p>
                     {
                         fileUrl && (
                             
@@ -234,13 +240,13 @@ export default function CreateItem() {
                             alt="Picture of the author"
                             className="rounded mt-4"
                             width={350}
-                            height={500} 
+                            height={400} 
                             // blurDataURL="data:..." automatically provided
                             // placeholder="blur" // Optional blur-up while loading
                             />
                         )
                     }
-                    <p className="text-xs italic text-rose-600">{errors.Asset?.message}</p>
+                    
                 </div>
                 <div className="w-full px-4 py-3 text-right sm:px-6">
                     <button 
