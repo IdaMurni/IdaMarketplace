@@ -1,10 +1,13 @@
 import {useState } from 'react'
+import { useForm } from 'react-hook-form';
 import {ethers } from 'ethers'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
 import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
-const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
+const client = ipfsHttpClient(); //'https://ipfs.infura.io:5001/api/v0'
 
 import {
     nftAddress,nftMarketAddress
@@ -116,6 +119,31 @@ export default function CreateItem() {
     
     }
 
+    const validationSchema = Yup.object().shape({
+        name: Yup.string()
+            .required('Name is required'),
+        price: Yup.string()
+            .required('Price is required'),
+        category: Yup.string()
+            .required('category is required'),
+        description: Yup.string()
+            .required('description is required'),
+        Asset: Yup.string()
+            .required('Asset is required')
+    });
+    const formOptions = { resolver: yupResolver(validationSchema) };
+
+    // get functions to build form with useForm() hook
+    const { register, handleSubmit, formState } = useForm(formOptions);
+    const { errors } = formState;
+    console.log('error >>', errors)
+
+    function onSubmit(data) {
+        // display form data on success
+        alert('SUCCESS!! :-)\n\n' + JSON.stringify(formInput)) //JSON.stringify(data, null, 4));
+        return false;
+    }
+
     return (
         <>
         <div className="pl-4 pt-10 mb-10">
@@ -125,52 +153,62 @@ export default function CreateItem() {
         <div className="max-w-md w-full space-y-8">
         <div className="flex justify-center">
             <div className="flex flex-wrap -mx-3 mb-6">
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full px-3">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Name
                     </label>
+                    <p className="text-rose-600 text-xs italic">{errors.name?.message}</p>
                     <input 
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                         type="text"
                         placeholder="Asset Name"
+                        {...register('name')}
                         onChange={e => updateFormInput({...formInput, name: e.target.value})}
                     />
-                    <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
+                    
                 </div>
                 <div className="w-full px-3">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Price
                     </label>
+                    <p className="text-rose-600 text-xs italic">{errors.price?.message}</p>
                     <input 
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                         type="number"
                         placeholder="Price"
+                        {...register('price')}
                         onChange={e => updateFormInput({...formInput, price: e.target.value})}
                     />
-                    <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
+                    
                 </div>
                 <div className="w-full px-3">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Category
                     </label>
+                    <p className="text-rose-600 text-xs italic">{errors.category?.message}</p>
                     <select 
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         placeholder="Category of the asset"
+                        {...register('category')}
                         onChange={e => updateFormInput({...formInput, category: e.target.value})}
                     >
+                        <option value=""></option>
                         <option value="global">Global NFT</option>
                         <option value="card">Card NFT</option>
                         <option value="book">Book NFT</option>
                     </select>
-                    <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
+                    
                 </div>
                 <div className="w-full px-3">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Description
                     </label>
+                    <p className="text-xs italic text-rose-600">{errors.description?.message}</p>
                     <textarea 
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                         placeholder="sort Description about the asset"
+                        {...register('description')}
                         onChange={e => updateFormInput({...formInput, description: e.target.value})}
                     />
                     <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
@@ -186,6 +224,7 @@ export default function CreateItem() {
                     file:bg-violet-50 file:text-violet-700
                     hover:file:bg-violet-100"
                     name="Asset"
+                    {...register('Asset')}
                     onChange={onChange}/>
                     {
                         fileUrl && (
@@ -201,12 +240,14 @@ export default function CreateItem() {
                             />
                         )
                     }
+                    <p className="text-xs italic text-rose-600">{errors.Asset?.message}</p>
                 </div>
                 <div className="w-full px-4 py-3 text-right sm:px-6">
-                    <button onClick={createNFT}
+                    <button 
                         className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >Create NFT</button>
                 </div>
+            </form>
             </div>
         </div>
         </div>

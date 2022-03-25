@@ -1,8 +1,5 @@
 import { ethers } from 'ethers';
-// import axios from 'axios';
 import { nftAddress, nftMarketAddress } from '../../config';
-
-// import NFT from '../../artifacts/contracts/NFT.sol/NFT.json';
 import Market from '../../artifacts/contracts/NFTMarket.sol/NFTMarket.json';
 
 import {useRouter} from "next/router";
@@ -24,7 +21,6 @@ const Details = () => {
       const network = await provider.getNetwork();
 
       try {
-        consolelog('networkId >>', process.env.NETWORK_ID)
         if (network.chainId === 80001){
           //signed trans
           const signer = provider.getSigner();
